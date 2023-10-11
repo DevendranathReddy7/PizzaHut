@@ -3,9 +3,10 @@ import SearchOrder from "./SearchOrder"
 
 const Header = () => {
     return (
-        <div>
+        <div className="bg-yellow-500">
             <Link to='/'>Pizza Hut 🛖</Link>
             <SearchOrder />
+
         </div>
     )
 }

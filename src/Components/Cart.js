@@ -30,8 +30,8 @@ function Cart() {
   return (
 
     <div>
-      <Outlet />
-      <Link to="/menu">&larr; Back to menu</Link>
+      {/* <Outlet /> */}
+      <Link to="/menu" className='text-sm text-blue-500 hover:text-blue-600'>&larr; Back to menu</Link>
 
       <h2>Your cart, %NAME%</h2>
 

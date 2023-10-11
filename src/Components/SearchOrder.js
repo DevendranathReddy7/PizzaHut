@@ -12,7 +12,7 @@ const SearchOrder = () => {
     }
     return (
         <form onSubmit={handleSubmit}>
-            <input type="text" placeholder="Enter your OrderID" value={query}
+            <input className="rounded-full text-sm bg-yellow-100 placeholder:text-stone-400 px-4 py-2 w-28 transition-all duration-300 sm:focus:w-72 focus:outline-none focus:ring focus:ring-yellow-500 sm:w-64" type="text" placeholder="Enter your OrderID" value={query}
                 onChange={(e) => setQuery(e.target.value)} />
             {/* <button>Search</button> */}
         </form>

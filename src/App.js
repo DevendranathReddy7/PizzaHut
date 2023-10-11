@@ -4,7 +4,7 @@ import Cart from "./Components/Cart"
 import Menu, { loader as menuLoader } from "./Components/Menu"
 import Order, { loader as orderLoader } from "./Components/Order"
 import Home from "./Components/Home"
-import CreateOrder from "./Components/CreateOrder"
+import CreateOrder, { action as createOrderAction } from "./Components/CreateOrder"
 import Error from "./Common/Error"
 
 const route = createBrowserRouter([
@@ -30,7 +30,8 @@ const route = createBrowserRouter([
 
       }, {
         path: '/order/new',
-        element: <CreateOrder />
+        element: <CreateOrder />,
+        action: createOrderAction
       }
     ]
   },

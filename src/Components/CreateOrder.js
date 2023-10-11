@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Form, redirect, useActionData, useNavigation } from "react-router-dom";
+import { createOrder } from "../Sevices/apiRestaurant";
 
 // https://uibakery.io/regex-library/phone-number
 const isValidPhone = (str) =>
@@ -32,13 +34,17 @@ const fakeCart = [
 
 function CreateOrder() {
   // const [withPriority, setWithPriority] = useState(false);
+  const navigation = useNavigation()
+  const submitting = navigation.state === 'submitting'
+  const formError = useActionData()
   const cart = fakeCart;
 
   return (
     <div>
       <h2>Ready to order? Let's go!</h2>
 
-      <form>
+      {/* <Form method="post" action="/order/new"> */}
+      <Form method="post" >
         <div>
           <label>First Name</label>
           <input type="text" name="customer" required />
@@ -49,6 +55,7 @@ function CreateOrder() {
           <div>
             <input type="tel" name="phone" required />
           </div>
+          {formError && <p>{formError.phone}</p>}
         </div>
 
         <div>
@@ -63,18 +70,36 @@ function CreateOrder() {
             type="checkbox"
             name="priority"
             id="priority"
-            // value={withPriority}
-            // onChange={(e) => setWithPriority(e.target.checked)}
+          // value={withPriority}
+          // onChange={(e) => setWithPriority(e.target.checked)}
           />
           <label htmlFor="priority">Want to yo give your order priority?</label>
         </div>
 
         <div>
-          <button>Order now</button>
+          <input type="hidden" name="cart" value={JSON.stringify(cart)} />
+          <button>{`${submitting ? 'Placing Order' : 'Order now'}`}</button>
         </div>
-      </form>
+      </Form>
     </div>
   );
 }
+export const action = async ({ request }) => {
+  const formData = await request.formData()
+  const data = Object.fromEntries(formData)
+  const order = {
+    ...data,
+    cart: JSON.parse(data.cart),
+    priority: data.priority === 'on',
+  }
 
+  const error = {}
+  if (!isValidPhone(order.phone)) {
+    error.phone = 'Please enter valid phone number.'
+  }
+  if (Object.keys(error).length > 0) return error
+
+  const newOrder = await createOrder(order)
+  return redirect(`/order/${newOrder.id}`)
+}
 export default CreateOrder;

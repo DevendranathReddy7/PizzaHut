@@ -1,17 +1,19 @@
 import { useLoaderData } from "react-router-dom";
 import { getMenu } from "../Sevices/apiRestaurant";
+import MenuItem from "./MenuItem";
 
 function Menu() {
   const menu = useLoaderData() //gets data from loader which we provoded in rote
   return (
-    menu.map(item => <li key={item.id}>
-      <p>{item.name}</p>
-      <img src={item.imageUrl} alt={item.name} />
-      <p>{item.unitPrice}</p>
-    </li>
+    <ul className="divide-y divide-stone-200 px-2">
+      {menu.map(pizza => (
+        <MenuItem pizza={pizza} key={pizza.id} />
+      )
 
-    )
+      )}
+    </ul>
   )
+
 }
 
 export const loader = async () => {

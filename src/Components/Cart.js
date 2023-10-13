@@ -31,7 +31,6 @@ const fakeCart = [
 function Cart() {
   const cart = fakeCart;
   const userName = useSelector(str => str.user.userName)
-
   return (
 
     <div className='px-4 py-3'>

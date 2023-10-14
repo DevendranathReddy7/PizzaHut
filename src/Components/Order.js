@@ -1,6 +1,6 @@
 // Test ID: IIDSAT
 
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useLocation, useParams } from "react-router-dom";
 import { getOrder } from "../Sevices/apiRestaurant";
 import {
   calcMinutesLeft,
@@ -8,6 +8,7 @@ import {
   formatDate,
 } from "../Sevices/helpers";
 import OrderItem from "./OrderItem";
+import LinkButton from "./LinkButton";
 
 const order = {
   id: "ABCDEF",
@@ -54,14 +55,15 @@ function Order() {
     estimatedDelivery,
     cart,
   } = useLoaderData();
-
+  const location = useParams();
+  const currentPathname = location.orderId;
   const deliveryIn = calcMinutesLeft(estimatedDelivery);
 
   return (
     <div className="px-4 py-6 space-y-8" >
-
+      <LinkButton to="/menu">&larr; Back to menu</LinkButton>
       <div className="flex items-center justify-between flex-wrap gap-2">
-        <h2 className="text-xl font-semibold">Status</h2>
+        <h2 className="text-xl font-semibold">Order #{currentPathname} Status</h2>
 
         <div className="space-x-2">
           {priority && <span className="bg-red-500 rounded-full py-1 px-3 text-sm uppercase font-semibold tracking-wide text-red-50 ">Priority</span>}

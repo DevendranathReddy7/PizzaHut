@@ -3,6 +3,7 @@ import Button from "./Button"
 import { addItem, decreaseItemsQuantity, getCart, increaseItemsQuantity } from "../Sevices/cartSlice"
 
 const Add_Edit_Button = ({ pizza }) => {
+
     const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
 
     const dispatch = useDispatch()
@@ -41,8 +42,6 @@ const Add_Edit_Button = ({ pizza }) => {
                 <Button type='count' onClick={() => handleIncrease(id)}>+</Button>
             </Button>
                 : <Button type='small' onClick={handleAddToCart}>Add to cart</Button>}
-
-
         </div>
     )
 }

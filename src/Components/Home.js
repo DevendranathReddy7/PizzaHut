@@ -12,7 +12,7 @@ function Home() {
         <span className="text-yellow-500">Straight out of the oven, straight to you.</span>
 
       </h1>
-      {userName === '' ? <CreateUser /> : <Button type='primary'>Check Out</Button>}
+      {userName === '' ? <CreateUser /> : <Button type='primary' to='/menu'>Check Out</Button>}
     </div>
   );
 }

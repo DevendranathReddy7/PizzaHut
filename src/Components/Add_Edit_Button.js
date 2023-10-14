@@ -8,10 +8,9 @@ const Add_Edit_Button = ({ pizza }) => {
     const dispatch = useDispatch()
 
     const cartItems = useSelector(getCart)
-    console.log(id)
-    console.log(cartItems)
+
     const alreadyAddedItem = cartItems.find(item => item.pizzaId === id)
-    console.log(alreadyAddedItem)
+
     const handleAddToCart = () => {
         const NewItem = {
             pizzaId: id,
@@ -25,6 +24,9 @@ const Add_Edit_Button = ({ pizza }) => {
     }
 
     const handleDecrease = (id) => {
+        const clickedItem = cartItems.filter(item => item.pizzaId === id)
+        const qnty = clickedItem[0].quantity
+        if (qnty <= 0) return ''
         dispatch(decreaseItemsQuantity(id))
     }
 
